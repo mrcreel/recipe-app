@@ -1,21 +1,42 @@
-import { useState } from "react"
+import { FormEvent, useState } from "react"
 import "./App.css"
 import * as api from "./api"
+import { Recipe } from "./types"
 
 const App = () => {
-  const [searchTerm, setSearchTerm] = useState("burger")
-  const [recipes, setRecipes] = useState([])
+  const [searchTerm, setSearchTerm] = useState<string>("")
+  const [recipes, setRecipes] = useState<Recipe[]>([])
 
-  const handleSearchSubmit = async () => {
+  const handleSearchSubmit = async (event: FormEvent) => {
+    event.preventDefault()
     try {
       const recipes = await api.searchRecipes(searchTerm, 1)
-      setRecipes(recipes)
+      setRecipes(recipes.results)
     } catch (error) {
       console.error(error)
     }
   }
 
-  return <div>App</div>
+  return (
+    <div>
+      <form onSubmit={(e) => handleSearchSubmit(e)}>
+        <input
+          type='text'
+          required
+          placeholder='Enter a search Term'
+          value={searchTerm}
+          onChange={(event) => setSearchTerm(event.target.value)}
+        />
+        <button type='submit'>Submit</button>
+      </form>
+      {recipes.map((recipe: Recipe) => (
+        <div>
+          recipe title: {recipe.title}
+          recipe image location: {recipe.image}
+        </div>
+      ))}
+    </div>
+  )
 }
 
 export default App
