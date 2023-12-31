@@ -16,6 +16,12 @@ app.get("/api/recipes/search", async (req, res) => {
   return res.json(results)
 })
 
+app.get("/api/recipes/:recipeId/summary", async (req, res) => {
+  const recipeId = req.params.recipeId
+  const results = await recipeApi.getRecipeSummary(recipeId)
+  return res.json(results)
+})
+
 app.listen(5000, () => {
   console.log(`Server running on http://localhost:5000`)
 })
