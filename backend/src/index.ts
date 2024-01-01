@@ -50,6 +50,25 @@ app.get("/api/recipes/favorites", async (req, res) => {
     return res.json(favoriteRecipes)
   } catch (error) {
     console.error(error)
+    return res.status(500).json({ error: `Error getting favorite recipes` })
+  }
+})
+
+app.delete("/api/recipes/favorites", async (req, res) => {
+  const recipeId = req.body.recipeId
+
+  try {
+    await prismaClient.favoriteRecipe.delete({
+      where: {
+        recipeId: recipeId,
+      },
+    })
+    return res.status(204).send()
+  } catch (error) {
+    console.error(error)
+    return res
+      .status(500)
+      .json({ error: `Error deleting recipe from favurites` })
   }
 })
 
