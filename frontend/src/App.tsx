@@ -51,6 +51,15 @@ const App = () => {
     }
   }
 
+  const addFavoriteRecipe = async (recipe: Recipe) => {
+    try {
+      await api.addFavoriteRecipe(recipe)
+      setFavoriteRecipes([...favoriteRecipes, recipe])
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return (
     <div>
       <div className='tabs'>
@@ -73,6 +82,7 @@ const App = () => {
             <RecipeCard
               recipe={recipe}
               onClick={() => setSelectedRecipe(recipe)}
+              onFavoriteIconClick={addFavoriteRecipe}
             />
           ))}
           <button className='viewMoreButton' onClick={handleViewMoreClick}>
@@ -87,6 +97,7 @@ const App = () => {
             <RecipeCard
               recipe={recipe}
               onClick={() => setSelectedRecipe(recipe)}
+              onFavoriteIconClick={() => undefined}
             />
           ))}
         </div>
