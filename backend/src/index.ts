@@ -2,6 +2,7 @@ import express, { application } from "express"
 import cors from "cors"
 
 import * as recipeApi from "./recipe-api"
+import { PrismaClient } from "@prisma/client"
 
 const app = express()
 
@@ -20,6 +21,24 @@ app.get("/api/recipes/:recipeId/summary", async (req, res) => {
   const recipeId = req.params.recipeId
   const results = await recipeApi.getRecipeSummary(recipeId)
   return res.json(results)
+})
+
+const prismaClient = new PrismaClient()
+
+app.post("/api/recipes/favorites", async (req, res) => {
+  const recipeId = req.body.recipeId
+
+  try {
+    const favoriteRecipe = await prismaClient.favoriteRecipe.create({
+      data: {
+        recipeId,
+      },
+    })
+    return res.status(201).json(favoriteRecipe)
+  } catch (error) {
+    console.error(error)
+    return res.status(500).json({ error: `Error adding recipe to favurites` })
+  }
 })
 
 app.listen(5000, () => {
