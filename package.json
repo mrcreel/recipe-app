@@ -9,6 +9,7 @@
     "prisma"
   ],
   "author": "Michael R Creel <michaelrcreel@gmail.com>",
+  "repository": "https://github.com/mrcreel/recipe-app",
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^5.7.1",
