@@ -74,10 +74,26 @@ const App = () => {
   }
 
   return (
-    <div>
+    <div className='container'>
+      <div className='header'>
+        <header>
+          <img src='/hero-image.jpg' alt='header image of food' />
+          <div className='title'>My Recipe App</div>
+        </header>
+      </div>
       <div className='tabs'>
-        <h1 onClick={() => setSelectedTab("search")}>Recipe Search</h1>
-        <h1 onClick={() => setSelectedTab("favorites")}>Favorites</h1>
+        <h1
+          className={selectedTab === "search" ? "tabActive" : ""}
+          onClick={() => setSelectedTab("search")}
+        >
+          Recipe Search
+        </h1>
+        <h1
+          className={selectedTab === "favorites" ? "tabActive" : ""}
+          onClick={() => setSelectedTab("favorites")}
+        >
+          Favorites
+        </h1>
       </div>
       {selectedTab === "search" && (
         <>
