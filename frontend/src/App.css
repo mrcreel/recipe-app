@@ -92,6 +92,26 @@ header img {
   padding-bottom: 0.5em;
 }
 
+form {
+  display: flex;
+  background-color: white;
+  align-items: center;
+}
+input {
+  padding: 0.5em;
+  font-size: 2em;
+  flex: 1;
+  border: none;
+}
+input:focus {
+  outline: none;
+}
+button {
+  background-color: white;
+  border: none;
+  cursor: pointer;
+}
+
 .recipeCardTitle {
   display: flex;
   align-items: center;

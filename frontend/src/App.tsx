@@ -4,6 +4,7 @@ import * as api from "./api"
 import { Recipe } from "./types"
 import RecipeCard from "./components/RecipeCard"
 import RecipeModal from "./components/RecipeModal"
+import { AiOutlineSearch } from "react-icons/ai"
 
 type Tab = "search" | "favorites"
 
@@ -105,7 +106,9 @@ const App = () => {
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
             />
-            <button type='submit'>Submit</button>
+            <button type='submit'>
+              <AiOutlineSearch size={40} />
+            </button>
           </form>
           {recipes.map((recipe: Recipe) => {
             const isFavorite = favoriteRecipes.some(
