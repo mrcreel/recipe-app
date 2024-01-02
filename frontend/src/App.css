@@ -143,3 +143,10 @@ button {
   align-items: center;
   gap: 0.5em;
 }
+
+.viewMoreButton {
+  font-size: 1.5em;
+  padding: 1em;
+  font-weight: bold;
+  margin: auto;
+}
